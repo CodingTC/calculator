@@ -7,6 +7,11 @@
     box-sizing: border-box;
 }
 
+li
+{
+    list-style: none;
+}
+
 body
 {
     display: flex;
@@ -14,7 +19,131 @@ body
     align-items: center;
 }
 
+.calculator
+{
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    height: 750px;
+    border: 1px solid black;
+    padding: 20px;
+    gap: 15px;
+    background-color: #F0F0F0;
+}
+
+.calc-buttons
+{
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    gap: 5px;
+}
+
+.calc-nums
+{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 3;
+}
+
+#calc-text
+{
+    flex: 1;
+    font-size: 35px;
+}
+
+.calc-buttons
+{
+    flex: 7;
+}
+
+.calc-operators
+{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.calc-operators li
+{
+    flex: 1;
+    display: flex;
+}
+
+.calc-operators li button
+{
+    border-radius: 12px;
+    background-color: #FFCC00;
+    flex: 1;
+}
 
 
+.calc-first-row,
+.calc-second-row,
+.calc-third-row,
+.calc-fourth-row
+{
+    display: flex;
+    flex: 1;
+    gap: 2px;
+}
+
+.calc-nums .calc-first-row li,
+.calc-nums .calc-second-row li,
+.calc-nums .calc-third-row li
+{
+    display: flex;
+    flex: 1;
+}
+
+.calc-first-row li button,
+.calc-second-row li button,
+.calc-third-row li button
+{
+    border-radius: 12px;
+    background-color: #FAFAFA;
+    flex: 1;
+}
+
+.calc-first-row li button:active,
+.calc-second-row li button:active,
+.calc-third-row li button:active
+{
+    background-color: #DDDDDD;
+}
+
+.calc-fourth-row li 
+{
+    display: flex;
+    flex: 1;
+}
+
+button:hover
+{
+    cursor: pointer;
+}
+
+.calc-fourth-row li button
+{
+    border-radius: 12px;
+    background-color: #FAFAFA;
+    flex: 1;
+}
+.calc-fourth-row li button:active
+{
+    background-color: #DDDDDD;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
 
 
