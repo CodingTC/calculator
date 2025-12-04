@@ -106,7 +106,7 @@ operators.forEach((button) => {
         if(e.target.textContent === "=")
         {
             switchToRightOperand = false;
-            if((curOperator === "" || rightOperand === "") && leftOperand != "")
+            if(curOperator === "" && leftOperand != "")
             {
                 return;
             }
@@ -131,6 +131,16 @@ operators.forEach((button) => {
             rightOperand = "";
             leftOperand = calcText.value;
             return;
+        }
+
+        if(leftOperand && rightOperand && curOperator)
+        {
+            let num1 = parseFloat(leftOperand);
+            let num2 = parseFloat(rightOperand);
+            calcText.value = "";
+            rightOperand = "";
+            calcText.value = operate(curOperator, num1, num2);
+            leftOperand = calcText.value;
         }
         
         curOperator = e.target.textContent;
