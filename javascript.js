@@ -63,4 +63,8 @@ numButtons.forEach((button) => {
     });
 });
 
+const calcClear = document.querySelector(".calc-clear button");
 
+calcClear.addEventListener("click", () => {
+    calcText.value = "";
+});

@@ -32,11 +32,39 @@ body
     box-shadow: 0 0px 8px rgba(150, 150, 150, 1);
 }
 
+
+
 .calc-buttons
 {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     flex: 1;
+    gap: 5px;
+}
+
+.calc-clear
+{
+    flex: 1;
+    display: flex;
+}
+
+.calc-clear button
+{
+    flex: 1;
+    background-color: #DDDDDD;
+    border-radius: 8px;
+}
+
+.calc-clear button:active
+{
+    background-color: #FAFAFA; 
+}
+
+
+.main-calc-buttons
+{
+    flex: 12;
+    display: flex;
     gap: 5px;
 }
 
