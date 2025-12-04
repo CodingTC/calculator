@@ -46,6 +46,9 @@ function operate(operator, a, b)
     return result;
 }
 
+let curCalcDisplay = "";
+let leftOperand = "";
+let curOperator = "";
 
 const numButtons = document.querySelectorAll(".calc-nums ul li button");
 const calcText = document.getElementById("calc-text");
@@ -60,6 +63,7 @@ numButtons.forEach((button) => {
             return;
         }
         calcText.value += e.target.textContent;
+        curCalcDisplay = calcText.value;
     });
 });
 
@@ -67,4 +71,26 @@ const calcClear = document.querySelector(".calc-clear button");
 
 calcClear.addEventListener("click", () => {
     calcText.value = "";
+    curCalcDisplay = calcText.value;
 });
+
+const operators = document.querySelectorAll(".calc-operators li button")
+
+operators.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        operators.forEach(button => {
+            button.style.backgroundColor = "#FFCC00";
+        });
+
+        if(e.target.textContent === "=")
+        {
+            operate(curOperator, leftOperand, curCalcDisplay);
+            return;
+        }
+
+        curOperator = e.target.textContent;
+        e.target.style.backgroundColor = "#FAFAFA";
+    });
+});
+
+
