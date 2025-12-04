@@ -41,14 +41,17 @@ function operate(operator, a, b)
         case "/":
             result = divide(a, b);
             break;
+        default:
+            return 0;
     }
-
+    
     return result;
 }
 
-let curCalcDisplay = "";
+let rightOperand = "";
 let leftOperand = "";
 let curOperator = "";
+let isOperatorSelected = false;
 
 const numButtons = document.querySelectorAll(".calc-nums ul li button");
 const calcText = document.getElementById("calc-text");
@@ -63,7 +66,14 @@ numButtons.forEach((button) => {
             return;
         }
         calcText.value += e.target.textContent;
-        curCalcDisplay = calcText.value;
+        if(leftOperand === "")
+        {
+            leftOperand = calcText.value;
+        }
+        else
+        {
+            rightOperand = calcText.value;
+        }
     });
 });
 
@@ -71,7 +81,10 @@ const calcClear = document.querySelector(".calc-clear button");
 
 calcClear.addEventListener("click", () => {
     calcText.value = "";
-    curCalcDisplay = calcText.value;
+    leftOperand = "";
+    rightOperand = "";
+    isOperatorSelected = false;
+    curOperator = "";
 });
 
 const operators = document.querySelectorAll(".calc-operators li button")
@@ -87,8 +100,9 @@ operators.forEach((button) => {
             operate(curOperator, leftOperand, curCalcDisplay);
             return;
         }
-
+        
         curOperator = e.target.textContent;
+        isOperatorSelected = true;
         e.target.style.backgroundColor = "#FAFAFA";
     });
 });
