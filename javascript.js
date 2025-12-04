@@ -47,3 +47,20 @@ function operate(operator, a, b)
 }
 
 
+const numButtons = document.querySelectorAll(".calc-nums ul li button");
+const calcText = document.getElementById("calc-text");
+
+numButtons.forEach((button) => {
+    //on each calc num and "." make sure it fits in input & 
+    //append the clicked button text
+    button.addEventListener("click", (e) => {
+        if((e.target.textContent === "." && calcText.value.includes("."))
+        || calcText.value.length >= 23)
+        {
+            return;
+        }
+        calcText.value += e.target.textContent;
+    });
+});
+
+
