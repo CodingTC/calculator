@@ -35,14 +35,14 @@ function operate(operator, a, b)
         case "-":
             result = subtract(a, b);
             break;
-        case "*":
+        case "×":
             result = multiply(a, b);
             break;
-        case "/":
+        case "÷":
             result = divide(a, b);
             break;
         default:
-            return 0;
+            return;
     }
     
     return result;
@@ -51,7 +51,7 @@ function operate(operator, a, b)
 let rightOperand = "";
 let leftOperand = "";
 let curOperator = "";
-let isOperatorSelected = false;
+let switchToRightOperand = false;
 
 const numButtons = document.querySelectorAll(".calc-nums ul li button");
 const calcText = document.getElementById("calc-text");
@@ -65,8 +65,13 @@ numButtons.forEach((button) => {
         {
             return;
         }
+        if(switchToRightOperand && rightOperand === "")
+        {
+            calcText.value = "";
+        }
+
         calcText.value += e.target.textContent;
-        if(leftOperand === "")
+        if(leftOperand === "" || !switchToRightOperand)
         {
             leftOperand = calcText.value;
         }
@@ -83,8 +88,11 @@ calcClear.addEventListener("click", () => {
     calcText.value = "";
     leftOperand = "";
     rightOperand = "";
-    isOperatorSelected = false;
+    switchToRightOperand = false;
     curOperator = "";
+    operators.forEach(button => {
+        button.style.backgroundColor = "#FFCC00";
+    });
 });
 
 const operators = document.querySelectorAll(".calc-operators li button")
@@ -97,12 +105,36 @@ operators.forEach((button) => {
 
         if(e.target.textContent === "=")
         {
-            operate(curOperator, leftOperand, curCalcDisplay);
+            switchToRightOperand = false;
+            if((curOperator === "" || rightOperand === "") && leftOperand != "")
+            {
+                return;
+            }
+            if(leftOperand === "")
+            {
+                calcText.value = "NaN";
+                rightOperand = "";
+                return;
+            }
+            let num1 = parseFloat(leftOperand);
+            let num2 = parseFloat(rightOperand);
+
+            if(rightOperand === "" && curOperator != "" && leftOperand != "")
+            {
+                calcText.value = operate(curOperator, num1, num1); 
+                leftOperand = calcText.value;
+                return;
+            }
+
+            calcText.value = "";
+            calcText.value = operate(curOperator, num1, num2);
+            rightOperand = "";
+            leftOperand = calcText.value;
             return;
         }
         
         curOperator = e.target.textContent;
-        isOperatorSelected = true;
+        switchToRightOperand = true;
         e.target.style.backgroundColor = "#FAFAFA";
     });
 });
