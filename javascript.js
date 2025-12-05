@@ -48,6 +48,7 @@ function operate(operator, a, b)
     return result;
 }
 
+let lastOperatorWasEquals = false;
 let rightOperand = "";
 let leftOperand = "";
 let curOperator = "";
@@ -65,6 +66,16 @@ numButtons.forEach((button) => {
         {
             return;
         }
+        if(lastOperatorWasEquals)
+        {
+            lastOperatorWasEquals = false;
+            calcText.value = "";
+            leftOperand = "";
+            rightOperand = "";
+            switchToRightOperand = false;
+            curOperator = "";
+        }
+
         if(switchToRightOperand && rightOperand === "")
         {
             calcText.value = "";
@@ -105,7 +116,7 @@ operators.forEach((button) => {
 
         if(e.target.textContent === "=")
         {
-            switchToRightOperand = false;
+            lastOperatorWasEquals = true;
             if(curOperator === "" && leftOperand != "")
             {
                 return;
@@ -142,7 +153,9 @@ operators.forEach((button) => {
             calcText.value = operate(curOperator, num1, num2);
             leftOperand = calcText.value;
         }
-        
+       
+        lastOperatorWasEquals = false;
+            
         curOperator = e.target.textContent;
         switchToRightOperand = true;
         e.target.style.backgroundColor = "#FAFAFA";
