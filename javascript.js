@@ -44,6 +44,15 @@ function operate(operator, a, b)
         default:
             return;
     }
+
+    let stringedResult = String(result);
+
+    if(stringedResult.includes("."))
+    {
+        let dotIndex = stringedResult.indexOf(".");
+
+        return stringedResult.slice(dotIndex).length > 10 ? parseFloat(result.toFixed(10)) : result;
+    }
     
     return result;
 }
@@ -66,6 +75,8 @@ numButtons.forEach((button) => {
         {
             return;
         }
+        //if you hit a number button right after hitting equals you should
+        //start and entirely new calculation
         if(lastOperatorWasEquals)
         {
             lastOperatorWasEquals = false;
