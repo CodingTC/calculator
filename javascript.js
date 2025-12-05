@@ -9,8 +9,7 @@ function subtract(a, b)
 }
 
 function multiply(a, b)
-{
-    return a * b;
+{ return a * b;
 }
 
 function divide(a, b)
@@ -75,6 +74,7 @@ numButtons.forEach((button) => {
         {
             return;
         }
+
         //if you hit a number button right after hitting equals you should
         //start and entirely new calculation
         if(lastOperatorWasEquals)
@@ -173,4 +173,13 @@ operators.forEach((button) => {
     });
 });
 
+calcText.addEventListener("keydown", (e) => 
+    {
+        const invalidKeys = "abcdefghijklmnopqrstuvwxyz+=!@#$%^&*()_-\\|'\";:/?]}[{.>,<~`";
 
+        if(invalidKeys.includes(e.key.toLowerCase()))
+        {
+            e.preventDefault();
+            return; 
+        }
+    });
